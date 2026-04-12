@@ -1,47 +1,47 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.edutech.progressive.dao.TransactionDAO;
 import com.edutech.progressive.entity.Transactions;
 import com.edutech.progressive.service.TransactionService;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class TransactionServiceImpl implements TransactionService {
 
-    @Override
-    public int addTransaction(Transactions transaction) throws SQLException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    private final TransactionDAO transactionDAO;
 
-    @Override
-    public void deleteTransaction(int transactionId) throws SQLException {
-        // TODO Auto-generated method stub
-        
+    public TransactionServiceImpl(TransactionDAO transactionDAO) {
+        this.transactionDAO = transactionDAO;
     }
 
     @Override
     public List<Transactions> getAllTransactions() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+        return transactionDAO.getAllTransactions();
     }
 
     @Override
     public Transactions getTransactionById(int transactionId) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+        return transactionDAO.getTransactionById(transactionId);
     }
 
     @Override
-    public List<Transactions> getTransactionsByCustomerId(int customerId) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public int addTransaction(Transactions transaction) throws SQLException {
+        return transactionDAO.addTransaction(transaction);
     }
 
     @Override
     public void updateTransaction(Transactions transaction) throws SQLException {
-        // TODO Auto-generated method stub
-        
+        transactionDAO.updateTransaction(transaction);
     }
-    
+
+    @Override
+    public void deleteTransaction(int transactionId) throws SQLException {
+        transactionDAO.deleteTransaction(transactionId);
+    }
+
+    @Override
+    public List<Transactions> getTransactionsByCustomerId(int customerId) throws SQLException {
+        return transactionDAO.getTransactionsByCustomerId(customerId);
+    }
 }

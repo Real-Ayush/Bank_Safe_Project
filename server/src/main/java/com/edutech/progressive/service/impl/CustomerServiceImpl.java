@@ -1,53 +1,51 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import com.edutech.progressive.dao.CustomerDAO;
 import com.edutech.progressive.entity.Customers;
 import com.edutech.progressive.service.CustomerService;
 
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+
 public class CustomerServiceImpl implements CustomerService {
-    private CustomerDAO customerDAO;
-    
+
+    private final CustomerDAO customerDAO;
+
     public CustomerServiceImpl(CustomerDAO customerDAO) {
         this.customerDAO = customerDAO;
     }
 
     @Override
-    public int addCustomer(Customers customers) throws SQLException {
-        // TODO Auto-generated method stub
-        return -1;
+    public List<Customers> getAllCustomers() throws SQLException {
+        return customerDAO.getAllCustomers();
     }
 
     @Override
-    public List<Customers> getAllCustomers() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public int addCustomer(Customers customers) throws SQLException {
+        return customerDAO.addCustomer(customers);
     }
 
     @Override
     public List<Customers> getAllCustomersSortedByName() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+        List<Customers> list = customerDAO.getAllCustomers();
+        Collections.sort(list); // relies on Customers.compareTo (case-insensitive)
+        return list;
+    }
+
+    // Updates an existing customer's details
+    @Override
+    public void updateCustomer(Customers customers) throws SQLException {
+        customerDAO.updateCustomer(customers);
     }
 
     @Override
     public void deleteCustomer(int customerId) throws SQLException {
-        // TODO Auto-generated method stub
-        CustomerService.super.deleteCustomer(customerId);
+        customerDAO.deleteCustomer(customerId);
     }
 
     @Override
     public Customers getCustomerById(int customerId) throws SQLException {
-        // TODO Auto-generated method stub
-        return CustomerService.super.getCustomerById(customerId);
+        return customerDAO.getCustomerById(customerId);
     }
-
-    @Override
-    public void updateCustomer(Customers customers) throws SQLException {
-        // TODO Auto-generated method stub
-        CustomerService.super.updateCustomer(customers);
-    }
-    
 }

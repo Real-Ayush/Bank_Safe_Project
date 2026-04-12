@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.edutech.progressive.entity.Transactions;
 
 import java.util.List;
-
+@RestController
 public class TransactionController {
 
     public ResponseEntity<List<Transactions>> getAllTransactions() {

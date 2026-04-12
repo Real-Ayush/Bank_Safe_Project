@@ -1,10 +1,5 @@
 package com.edutech.progressive.entity;
 
-import java.util.Comparator;
-
-import javax.persistence.Entity;
-
-@Entity
 public class Accounts implements Comparable<Accounts>{
     private int accountId;
     private int customerId;
@@ -36,9 +31,7 @@ public class Accounts implements Comparable<Accounts>{
     }
     @Override
     public int compareTo(Accounts o) {
-        
-        return Double.compare(this.getBalance(), o.getBalance());
-    }
+        return Double.compare(this.balance, o.getBalance());
+        }
     
- 
 }
