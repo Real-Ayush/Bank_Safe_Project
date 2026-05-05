@@ -79,7 +79,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/{accountId}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasRole('ADMIN')") // ✅ covers both JWT and WithMockUser
+    @PreAuthorize("hasAuthority('ADMIN') or hasRole('ADMIN')") 
     public ResponseEntity<Void> deleteAccount(@PathVariable int accountId) {
         try {
             accountServiceImplJpa.deleteAccount(accountId);
