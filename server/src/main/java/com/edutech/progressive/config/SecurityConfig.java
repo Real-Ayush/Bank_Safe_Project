@@ -12,7 +12,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,10 +31,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-            .authorizeRequests()
-            // ⭐ Day‑12 tests require full access (no JWT)
-            .antMatchers("/**").permitAll()
-            .anyRequest().authenticated();
+                .authorizeRequests()
+                // ⭐ Day‑12 tests require full access (no JWT)
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -45,4 +46,10 @@ public class SecurityConfig {
             throws Exception {
         return config.getAuthenticationManager();
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
